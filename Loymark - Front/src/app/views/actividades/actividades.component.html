@@ -1,0 +1,64 @@
+<c-card>
+    <c-card-header>
+      <form cForm>
+        <c-row>
+          <c-col [md]="4">
+            <h5>
+              <label>Actividades</label>
+            </h5>
+          </c-col>
+          <c-col [md]="12">
+  
+            <div class="border-0shadow">
+  
+              <input class="form-control col-12 mt-1" type="text" name="filtro" [(ngModel)]="filtro"  placeholder="Buscar...">
+  
+            </div>
+          </c-col>
+        </c-row>
+      </form>
+    </c-card-header>
+    <c-card-body>
+      <c-card>
+        <c-card-header class="text-center">
+          <h5>Listado De Actividades</h5>
+        </c-card-header>
+        <c-card-body>
+          <table cTable [striped]="true" responsive="xxl">
+            <!-----tabla ejemplo-->
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha Actividad</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Actividad</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+  <!-- | filter:filtro  
+                            | paginate: {itemsPerPage: 10, currentPage: pageActual} -->
+              <tr *ngFor="let item of list| filter:filtro  
+              | paginate: {itemsPerPage: 10, currentPage: pageActual}
+                             ;
+               let i = index">
+                <td>{{i+1}}</td>
+                <td hidden>{{item.id}}</td>
+                <td>{{item.createDate}}</td>
+                <td >{{item.nombreCompleto }}</td>
+                <td > {{item.actividad}}</td>
+               
+
+              </tr>
+  
+            </tbody>
+            <!-----fin ejemplo-->
+          </table>
+          <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"
+            class="text-center">
+        </pagination-controls>
+        </c-card-body>
+      </c-card>
+    </c-card-body>
+  </c-card>

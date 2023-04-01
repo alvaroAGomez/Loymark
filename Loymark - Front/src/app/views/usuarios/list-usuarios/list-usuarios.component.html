@@ -1,0 +1,94 @@
+<c-card>
+    <c-card-header>
+      <form cForm>
+        <c-row>
+          <c-col [md]="4">
+            <h5>
+              <label>Usuarios</label>
+            </h5>
+          </c-col>
+          <c-col [md]="12">
+  
+            <div class="border-0shadow">
+  
+              <input class="form-control col-12 mt-1" type="text" name="filtro" [(ngModel)]="filtro"  placeholder="Buscar...">
+  
+            </div>
+          </c-col>
+        </c-row>
+      </form>
+    </c-card-header>
+    <c-card-body>
+      <c-card>
+        <c-card-header class="text-center">
+          <h5>Listado De Usuarios</h5>
+        </c-card-header>
+        <c-card-body>
+          <table cTable [striped]="true" responsive="xxl">
+            <!-----tabla ejemplo-->
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre y Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+  
+<!--  -->
+  
+              <tr *ngFor="let item of list | filter:filtro  
+              | paginate: {itemsPerPage: 10, currentPage: pageActual}
+                             ;
+               let i = index">
+                <td>{{i+1}}</td>
+                <td hidden>{{item.id}}</td>
+                <td>{{item.nombre }} {{item.apellido}}</td>
+                <td >{{item.email | slice:0:70 }}</td>
+                <td >{{item.telefono }}</td>
+                <td >{{item.paisReferencia | slice:0:70 }}</td>
+               
+                <td>
+                  <div class="row">
+                    <!-- <div class="col">
+                      <button class="btn btn-danger btn-sm">x</button>
+                    </div> -->
+                    <div class="col">
+                      <button class="btn btn-success btn-sm text-white"
+                      (click)="viewUsuario(item.id)"
+                      > ver usuario
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-warning btn-sm text-white"
+                      (click)="updateUsuario(item.id)"
+                     > actualizar
+                      <i class="fa-solid fa-edit"></i>
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button class="btn  btn-danger btn-sm text-white"
+                      (click)="deleteUsuario(item.id)"
+                     > eliminar
+                      <i class="fa-solid fa-circle-xmark"></i>
+                      </button>
+                    </div>
+                  </div>               
+                
+                </td>
+              </tr>
+  
+            </tbody>
+            <!-----fin ejemplo-->
+          </table>
+          <pagination-controls (pageChange)="pageActual = $event" previousLabel="Anterior" nextLabel="Siguiente"
+            class="text-center">
+        </pagination-controls>
+        </c-card-body>
+      </c-card>
+    </c-card-body>
+  </c-card>

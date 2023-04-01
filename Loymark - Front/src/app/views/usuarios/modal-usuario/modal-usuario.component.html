@@ -1,0 +1,177 @@
+<div  class="container mt-2 mb-3">
+    <div class="col-md-12">
+        <h1>{{modalName}}</h1>
+    </div>
+    <div  class="card shadow">
+        <div *ngIf="modalName != 'Detalle de Categoría'" class="card-body">
+            <form [formGroup]="formCategory" (ngSubmit)="onSubmit(formCategory.value)" class="form">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+
+                        <input autocomplete="off" formControlName="nombre" class="form-control"
+                            placeholder="Nombre " />
+                        <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="validation-error mt-1"
+                            role="alert">
+                            <span *ngIf="nombre?.hasError('required')">
+                                El nombre es <strong>requerido</strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input autocomplete="off" formControlName="apellido" class="form-control"
+                        placeholder="apellido " />
+                    <div *ngIf="apellido?.invalid && (apellido?.dirty || apellido?.touched)" class="validation-error mt-1"
+                        role="alert">
+                        <span *ngIf="apellido?.hasError('required')">
+                            El apellido es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+
+                        <input autocomplete="off" formControlName="email" class="form-control"
+                            placeholder="email " />
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="validation-error mt-1"
+                            role="alert">
+                            <span *ngIf="email?.hasError('required')">
+                                El email es <strong>requerido</strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="date" autocomplete="off" formControlName="fecha_nacimiento" class="form-control"
+                        placeholder="fecha_nacimiento " />
+                    <div *ngIf="fecha_nacimiento?.invalid && (fecha_nacimiento?.dirty || fecha_nacimiento?.touched)" class="validation-error mt-1"
+                        role="alert">
+                        <span *ngIf="fecha_nacimiento?.hasError('required')">
+                            La fecha de naciemineto es <strong>requerida</strong>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+
+                        <input autocomplete="off" formControlName="telefono" class="form-control"
+                            placeholder="telefono" />
+                        <div *ngIf="telefono?.invalid && (telefono?.dirty || telefono?.touched)" class="validation-error mt-1"
+                            role="alert">
+                            <span *ngIf="telefono?.hasError('required')">
+                                El telefono es <strong>requerido</strong>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <select  aria-label="pais" cSelect formControlName="PaisReferencia">
+                            <option value="AR">Argentina</option>
+                            <option value="US">Estados Unidos</option>
+                            <option value="BR">Brasil</option>
+                            <option value="CL">Chile</option>
+                            <option value="EC">Ecuador</option>
+                            <option value="BO">Bolivia</option>
+                            <option value="MX">Mexico</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">¿Desea recibir información?</label>
+                        <div>
+                            <label class="m-2">
+                                <input type="radio" value="true" formControlName="recibir_info">
+                                  <span>Si</span>
+                              </label>
+                              <label class="m-2">
+                                <input type="radio" value="false" formControlName="recibir_info">
+                                  <span>No</span>
+                              </label>
+                        </div>
+                     
+                    </div>
+
+                </div>
+
+           
+                <button type="submit" [disabled]="!formCategory.valid" class="btn btn-primary">
+                    Guardar
+                </button>
+
+                <button type="button" (click)="close()" class="btn btn-danger">
+                    Cancelar
+                </button>
+            </form>
+        </div>
+
+<!-- PARA EL DETALLE  -->
+
+
+        <div *ngIf="modalName == 'Detalle de Categoría'" class="card-body">
+           
+
+
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+
+                        <h4 for="">Nombre: </h4>
+                        <h5>{{data[0].nombre}}</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 for="">Apellido: </h4>
+                        <h5>{{data[0].apellido}}</h5>
+                    </div>
+                </div>
+
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+
+                        <h4 for="">Email: </h4>
+                        <h5>{{data[0].email}}</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 for="">Fecha Nacimiento: </h4>
+                        <h5>{{data[0].fechaNacimiento}}</h5>
+                    </div>
+                </div>
+
+
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+
+                        <h4 for="">Telefono: </h4>
+                        <h5>{{data[0].telefono}}</h5>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h4 for="">Pais de Referencia: </h4>
+                        <h5>{{data[0].paisReferencia}}</h5>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <button type="button" (click)="close()" class="btn btn-danger">
+                    Salir
+                </button>
+
+        </div>
+    </div>

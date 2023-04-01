@@ -1,0 +1,7 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/Loymark - Back/.vs
+/Loymark - Back/Loymark/bin/Debug/net5.0
+/Loymark - Back/Loymark/obj
